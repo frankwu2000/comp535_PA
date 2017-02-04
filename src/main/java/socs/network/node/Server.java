@@ -16,16 +16,8 @@ public class Server extends Thread {
 	public Server(int port, Router myself) throws IOException
 	{
 		self = myself;
-		try
-		{
-			serverSocket = new ServerSocket(port);
-			System.out.printf("Server socket opened on %s\n", serverSocket.toString());
-		}
-		catch (BindException e)
-		{
-			serverSocket = new ServerSocket(port+1);
-			System.out.printf("Server socket opened on %s\n", serverSocket.toString());
-		}
+		serverSocket = new ServerSocket(port);
+		System.out.printf("Server socket opened on %s\n", serverSocket.toString());
 	}
 	
 	public void run()

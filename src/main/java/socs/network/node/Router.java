@@ -10,7 +10,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
-
 public class Router {
 
   protected LinkStateDatabase lsd;
@@ -23,9 +22,13 @@ public class Router {
   public Router(Configuration config) {
 	  rd.simulatedIPAddress = config.getString("socs.network.router.ip");
 	  lsd = new LinkStateDatabase(rd);
+	  String port_num = rd.simulatedIPAddress;
+	  port_num = port_num.replaceAll("\\.", "");
+	  port_num = port_num.substring(7,port_num.length());
+	  int port_number = Integer.parseInt(port_num);
 	  try
 	  {
-		  Thread t = new Server(8000, this);
+		  Thread t = new Server(port_number, this);
 		  t.start();
 	  }
 	  catch(IOException e)
